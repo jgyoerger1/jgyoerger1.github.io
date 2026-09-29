@@ -1,0 +1,785 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Jordan Yoerger</title>
+<meta name="description" content="Jordan Yoerger: Director of Enterprise Technology Portfolio &amp; Delivery, mechanical engineer, PMP, MBA, and fine woodworker under the Yoergoods name. Career, credentials, skills, and woodworking portfolio.">
+<meta name="author" content="Jordan Yoerger">
+<link rel="canonical" href="https://jgyoerger1.github.io/">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<meta name="theme-color" content="#ECEEEE" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#151210" media="(prefers-color-scheme: dark)">
+<meta property="og:type" content="profile">
+<meta property="og:title" content="Jordan Yoerger">
+<meta property="og:description" content="Director of Enterprise Technology Portfolio &amp; Delivery. Mechanical engineer, PMP, MBA, fine woodworker.">
+<meta property="og:url" content="https://jgyoerger1.github.io/">
+<meta property="og:image" content="https://jgyoerger1.github.io/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+</head>
+<body><style>
+/* Layout: one engineering drawing sheet. A sticky title strip, a main view (portrait with lettered callouts),
+   lettered DETAIL views for each part of the story, and a title block at the foot. Palette lifted from the
+   subject's own river tables: cool drafting vellum, black walnut, blue epoxy. */
+:root{
+  --bg:#ECEEEE;
+  --surface:#F8F8F6;
+  --ink:#1B1917;
+  --muted:#5F5B57;
+  --line:#C7CBCD;
+  --line-strong:#8A8F93;
+  --walnut:#5B3A25;
+  --walnut-soft:#E9DED4;
+  --river:#176A86;
+  --river-ink:#0F4F65;
+  --river-soft:#D5E7EE;
+  --font-display:"Barlow Condensed","Arial Narrow","Helvetica Neue",Arial,sans-serif;
+  --font-body:"Source Serif 4",Georgia,"Times New Roman",serif;
+  --font-mono:"IBM Plex Mono",Consolas,"Courier New",monospace;
+  --sheet-pad:clamp(16px,4vw,56px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#151210; --surface:#1F1A17; --ink:#EFE8E0; --muted:#A99F95; --line:#3A332D; --line-strong:#5E554D;
+    --walnut:#C89165; --walnut-soft:#2B211A; --river:#5FC1DD; --river-ink:#8FD6EA; --river-soft:#16323B;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#151210; --surface:#1F1A17; --ink:#EFE8E0; --muted:#A99F95; --line:#3A332D; --line-strong:#5E554D;
+  --walnut:#C89165; --walnut-soft:#2B211A; --river:#5FC1DD; --river-ink:#8FD6EA; --river-soft:#16323B;
+  color-scheme:dark;
+}
+
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  background:var(--bg); color:var(--ink);
+  font-family:var(--font-body); font-size:1.0625rem; line-height:1.6;
+  padding-block:0 32px; padding-inline:16px;
+  -webkit-font-smoothing:antialiased;
+}
+@media (min-width:900px){ body{padding-inline:24px} }
+@media (prefers-reduced-motion:reduce){ html{scroll-behavior:auto} *,*::before,*::after{animation:none!important;transition:none!important} }
+
+h1,h2,h3,h4{font-family:var(--font-display);font-weight:600;line-height:1;margin:0;text-wrap:balance;letter-spacing:.005em}
+p{margin:0}
+a{color:var(--river-ink);text-decoration-thickness:1px;text-underline-offset:.16em}
+a:hover{color:var(--river)}
+:focus-visible{outline:2px solid var(--river);outline-offset:3px}
+img{max-width:100%;display:block}
+button{font:inherit;color:inherit}
+
+.mono{font-family:var(--font-mono);font-size:.78rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.num{font-variant-numeric:tabular-nums}
+
+/* ---------- sheet frame ---------- */
+.sheet{position:relative;max-width:1280px;margin:0 auto;background:var(--bg);padding-inline:var(--sheet-pad)}
+@media (min-width:1100px){
+  .sheet{border:1px solid var(--line-strong);margin-block:20px}
+  .sheet::before{content:"";position:absolute;inset:6px;border:2px solid var(--line-strong);pointer-events:none;z-index:0}
+  /* zone markers, as on a drawing border */
+  .zones{position:absolute;left:0;top:0;bottom:0;width:6px;display:flex;flex-direction:column;justify-content:space-around;pointer-events:none}
+  .zones span{font-family:var(--font-mono);font-size:10px;color:var(--muted);transform:translateX(-14px) rotate(-90deg);transform-origin:center;width:6px;text-align:center}
+}
+.zones{display:none}
+@media (min-width:1300px){ .zones{display:flex} }
+
+/* ---------- title strip ---------- */
+.titlebar{
+  position:sticky;top:env(safe-area-inset-top,0px);z-index:20;
+  display:flex;align-items:stretch;gap:0;flex-wrap:wrap;
+  margin-inline:calc(-1 * var(--sheet-pad));padding-inline:var(--sheet-pad);
+  background:color-mix(in srgb,var(--bg) 88%,transparent);
+  -webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--line-strong);
+}
+.tb-field{display:flex;flex-direction:column;justify-content:center;padding:10px 16px 10px 0;margin-right:16px;border-right:1px solid var(--line);min-height:56px}
+.tb-field .k{font-family:var(--font-mono);font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);line-height:1.2}
+.tb-field .v{font-family:var(--font-display);font-weight:700;font-size:1.15rem;line-height:1.1;letter-spacing:.02em;text-transform:uppercase;white-space:nowrap}
+.tb-field.brand .v{font-size:1.35rem}
+.tb-nav{margin-left:auto;display:flex;align-items:center;gap:2px;overflow-x:auto;scrollbar-width:none;padding-block:8px}
+.tb-nav::-webkit-scrollbar{display:none}
+.tb-nav a{font-family:var(--font-display);font-weight:600;font-size:1rem;letter-spacing:.06em;text-transform:uppercase;text-decoration:none;color:var(--muted);padding:8px 10px;border-radius:3px;white-space:nowrap;line-height:1}
+.tb-nav a:hover{color:var(--ink);background:var(--surface)}
+.tb-nav a[aria-current="true"]{color:var(--ink);box-shadow:inset 0 -2px 0 var(--river)}
+.tb-nav .sup{font-family:var(--font-mono);font-size:.6rem;letter-spacing:0;vertical-align:top;margin-right:4px;color:var(--river)}
+@media (max-width:760px){
+  .tb-field.rev{display:none}
+  .tb-nav{margin-left:0;flex-basis:100%;border-top:1px solid var(--line);padding-block:6px}
+  .tb-nav a{padding:6px 8px;font-size:.95rem}
+}
+
+/* ---------- main view / hero ---------- */
+.hero{display:grid;gap:40px;padding-block:clamp(40px,7vw,88px) clamp(32px,5vw,64px);align-items:center}
+@media (min-width:900px){ .hero{grid-template-columns:1.05fr 1fr;gap:56px} }
+.hero .eyebrow{display:flex;align-items:center;gap:12px;margin-bottom:22px}
+.hero .eyebrow::after{content:"";height:1px;width:64px;background:var(--line-strong)}
+.hero h1{font-size:clamp(2.7rem,6.2vw,5.3rem);font-weight:600;line-height:.96;letter-spacing:-.005em;margin-bottom:26px}
+.hero h1 em{font-style:normal;color:var(--river)}
+.hero .lede{font-size:clamp(1.05rem,1.4vw,1.25rem);max-width:34em;color:var(--ink);margin-bottom:28px}
+.hero .lede b{font-weight:600}
+.actions{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+.btn{
+  display:inline-flex;align-items:center;gap:10px;padding:12px 18px;border-radius:3px;
+  font-family:var(--font-display);font-weight:700;font-size:1.05rem;letter-spacing:.08em;text-transform:uppercase;
+  text-decoration:none;border:1.5px solid var(--ink);color:var(--ink);background:transparent;cursor:pointer;line-height:1;
+  transition:transform .15s ease,background .15s ease,color .15s ease
+}
+.btn:hover{transform:translateY(-1px);background:var(--ink);color:var(--bg)}
+.btn.primary{background:var(--river);border-color:var(--river);color:#fff}
+.btn.primary:hover{background:var(--river-ink);border-color:var(--river-ink);color:#fff}
+.btn svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+
+.figure{display:grid;grid-template-columns:minmax(0,1fr)}
+.portrait{position:relative;margin:0;width:100%;max-width:460px}
+@media (min-width:900px){ .portrait{justify-self:end} }
+.portrait .frame{position:relative;aspect-ratio:4/5;max-width:100%;overflow:hidden;border:1px solid var(--line-strong);background:var(--surface)}
+.portrait .frame img{object-position:50% 18%}
+.portrait img{width:100%;height:100%;object-fit:cover}
+.portrait .frame::after{content:"";position:absolute;inset:8px;border:1px solid rgba(255,255,255,.35);pointer-events:none}
+.portrait figcaption{display:flex;justify-content:space-between;gap:12px;margin-top:10px}
+/* dimension line under the portrait */
+.dim{position:relative;height:14px;margin-top:8px}
+.dim::before{content:"";position:absolute;left:0;right:0;top:7px;height:1px;background:var(--line-strong)}
+.dim::after{content:"";position:absolute;left:0;right:0;top:2px;height:11px;border-left:1px solid var(--line-strong);border-right:1px solid var(--line-strong)}
+.dim span{position:absolute;left:50%;top:-4px;transform:translateX(-50%);background:var(--bg);padding:0 8px;font-family:var(--font-mono);font-size:.68rem;letter-spacing:.08em;color:var(--muted)}
+
+/* parts list under the main view: one lettered item per detail view */
+.hero .callouts{grid-column:1 / -1}
+.callouts{list-style:none;margin:8px 0 0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:30px 24px}
+@media (min-width:640px){ .callouts{grid-template-columns:repeat(3,minmax(0,1fr))} }
+@media (min-width:1000px){ .callouts{grid-template-columns:repeat(5,minmax(0,1fr))} }
+.callout{position:relative;padding-top:20px;border-top:1px solid var(--line-strong);min-width:0}
+.callout .balloon{position:absolute;top:-15px;left:0;animation:pop .5s cubic-bezier(.2,.8,.2,1) both;animation-delay:calc(var(--i) * 80ms + 150ms)}
+@keyframes pop{from{transform:scale(.4);opacity:0}to{transform:scale(1);opacity:1}}
+.callout a{display:block;text-decoration:none;color:var(--ink)}
+.callout a:hover .cl-text{color:var(--river)}
+.balloon{display:inline-grid;place-items:center;width:30px;height:30px;border:1.5px solid var(--ink);border-radius:50%;font-family:var(--font-display);font-weight:700;font-size:1.05rem;line-height:1;background:var(--bg)}
+.cl-text{display:block;font-family:var(--font-display);font-weight:600;font-size:1.15rem;line-height:1.1;letter-spacing:.01em;padding-left:40px}
+.cl-sub{display:block;font-family:var(--font-mono);font-size:.64rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-top:5px;padding-left:40px}
+@media (min-width:1000px){ .cl-text,.cl-sub{padding-left:0} .callout{padding-top:26px} }
+
+/* ---------- detail sections ---------- */
+.detail{padding-block:clamp(40px,6vw,72px);border-top:1px solid var(--line-strong);scroll-margin-top:72px}
+.detail-head{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:12px 24px;margin-bottom:clamp(24px,3vw,40px)}
+.detail-tag{display:flex;align-items:center;gap:14px}
+.detail-tag .balloon{width:40px;height:40px;font-size:1.35rem;border-width:2px}
+.detail-tag h2{font-size:clamp(1.9rem,3.4vw,2.7rem);text-transform:uppercase;letter-spacing:.02em}
+.detail-tag .sub{font-family:var(--font-mono);font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:6px}
+.detail-note{font-family:var(--font-mono);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);padding-bottom:6px;white-space:nowrap}
+.prose{max-width:62ch}
+.prose p + p{margin-top:1em}
+.two-col{display:grid;gap:32px 56px}
+@media (min-width:900px){ .two-col{grid-template-columns:minmax(0,1.15fr) minmax(0,1fr)} }
+
+/* ---------- gantt ---------- */
+.gantt{--n:216;--now:calc(212.9 / 216 * 100%);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.g-row,.g-axis{display:grid;grid-template-columns:minmax(0,1fr)}
+@media (min-width:760px){ .g-row,.g-axis{grid-template-columns:minmax(0,290px) minmax(0,1fr);column-gap:20px} }
+.g-row{border-bottom:1px solid var(--line);padding-block:8px}
+.g-row:last-of-type{border-bottom:0}
+.g-label{min-width:0;display:flex;flex-direction:column;justify-content:center;padding-block:2px}
+.g-role{font-family:var(--font-display);font-weight:600;font-size:1.12rem;line-height:1.1;letter-spacing:.01em}
+.g-org{font-size:.92rem;color:var(--muted);line-height:1.3;margin-top:2px}
+.g-dates{font-family:var(--font-mono);font-size:.68rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-top:4px}
+.g-track{position:relative;min-height:34px;background-image:repeating-linear-gradient(to right,var(--line) 0 1px,transparent 1px 100%);background-size:calc(100% / 18) 100%;background-position:0 0}
+.g-track::after{content:"";position:absolute;top:0;bottom:0;left:var(--now);width:0;border-left:1px dashed var(--river);opacity:.7}
+.g-bar{position:absolute;top:50%;height:16px;transform:translateY(-50%);border-radius:2px;background:var(--river);min-width:3px;transform-origin:left center}
+.g-bar.eng{background:var(--walnut)}
+.g-bar.found{background:var(--line-strong)}
+.g-bar.present::after{content:"";position:absolute;right:-1px;top:-3px;bottom:-3px;width:3px;background:var(--river)}
+.gantt.play .g-bar{animation:grow .9s cubic-bezier(.2,.7,.2,1) both;animation-delay:calc(var(--d) * 45ms)}
+@keyframes grow{from{transform:translateY(-50%) scaleX(0)}to{transform:translateY(-50%) scaleX(1)}}
+.g-axis{padding-block:6px}
+.g-axis .g-label{font-family:var(--font-mono);font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.g-years{position:relative;height:16px}
+.g-years span{position:absolute;top:0;transform:translateX(-50%);font-family:var(--font-mono);font-size:.66rem;color:var(--muted);letter-spacing:.02em}
+.g-years span:first-child{transform:none}
+@media (max-width:759px){ .g-years span.odd{display:none} .g-track{margin-top:6px} }
+.legend{display:flex;flex-wrap:wrap;gap:8px 20px;margin-top:14px}
+.legend span{display:inline-flex;align-items:center;gap:8px;font-family:var(--font-mono);font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.legend i{width:18px;height:8px;border-radius:2px;background:var(--river);display:inline-block}
+.legend i.eng{background:var(--walnut)} .legend i.found{background:var(--line-strong)} .legend i.now{width:0;height:14px;border-left:1px dashed var(--river);border-radius:0}
+.hl-head{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:8px 20px;margin-top:48px;margin-bottom:6px;padding-bottom:8px;border-bottom:1px solid var(--line-strong)}
+.hl-head h3{font-size:1.5rem;text-transform:uppercase;letter-spacing:.03em}
+.hl-head p{font-family:var(--font-mono);font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.highlights{display:grid;grid-template-columns:minmax(0,1fr);gap:0 48px}
+@media (min-width:900px){ .highlights{grid-template-columns:repeat(2,minmax(0,1fr))} }
+.hl{padding-block:22px;border-bottom:1px solid var(--line);min-width:0}
+.hl h4{font-size:1.3rem;font-weight:600}
+.hl-org{font-family:var(--font-mono);font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:6px 0 12px}
+.hl ul{list-style:none;margin:0;padding:0;display:grid;gap:8px;font-size:.98rem}
+.hl li{display:grid;grid-template-columns:14px 1fr;gap:10px;align-items:start}
+.hl li::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--river);margin-top:.6em}
+
+/* ---------- education ---------- */
+.cred{display:grid;grid-template-columns:minmax(0,1fr);border-top:1px solid var(--line)}
+.cred-row{display:grid;grid-template-columns:minmax(0,1fr);gap:4px 24px;padding-block:18px;border-bottom:1px solid var(--line)}
+@media (min-width:640px){ .cred-row{grid-template-columns:140px minmax(0,1fr) auto} }
+.cred-when{font-family:var(--font-mono);font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);padding-top:6px}
+.cred-what h3{font-size:1.45rem;font-weight:600}
+.cred-what p{color:var(--muted);margin-top:4px;font-size:.98rem}
+.cred-meta{font-family:var(--font-mono);font-size:.74rem;letter-spacing:.06em;color:var(--ink);padding-top:6px;white-space:nowrap}
+.cred-meta b{color:var(--river-ink);font-weight:500}
+.courses{width:100%;border-collapse:collapse;margin-top:8px;font-size:.98rem}
+.courses th{font-family:var(--font-mono);font-size:.66rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);text-align:left;font-weight:500;padding:8px 0;border-bottom:1px solid var(--line-strong)}
+.courses td{padding:10px 0;border-bottom:1px solid var(--line);vertical-align:top}
+.courses td:last-child,.courses th:last-child{text-align:right;font-family:var(--font-mono);font-size:.8rem}
+.sidebox{border:1px solid var(--line-strong);padding:22px 24px;background:var(--surface)}
+.sidebox h3{font-size:1.35rem;text-transform:uppercase;letter-spacing:.04em;margin-bottom:12px}
+.sidebox h3 + .mono{display:block;margin-top:-8px;margin-bottom:14px}
+
+/* ---------- bill of materials ---------- */
+.bom{border-top:2px solid var(--line-strong);border-bottom:2px solid var(--line-strong)}
+.bom-row{display:grid;grid-template-columns:3rem 3.2rem minmax(0,1fr);gap:0 14px;align-items:start;padding-block:14px;border-bottom:1px solid var(--line)}
+.bom-row:last-child{border-bottom:0}
+.bom-row.head{padding-block:8px;border-bottom:1px solid var(--line-strong)}
+.bom-row.head span{font-family:var(--font-mono);font-size:.66rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.bom-item,.bom-qty{font-family:var(--font-mono);font-size:.82rem;padding-top:5px;color:var(--muted)}
+.bom-qty{color:var(--ink)}
+.bom-desc h3{font-size:1.3rem;font-weight:600;margin-bottom:8px}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{font-family:var(--font-mono);font-size:.74rem;letter-spacing:.02em;padding:4px 9px;border:1px solid var(--line-strong);border-radius:2px;background:var(--surface);color:var(--ink);line-height:1.3}
+.chip.hi{border-color:var(--river);color:var(--river-ink);background:var(--river-soft)}
+
+/* ---------- yoergoods ---------- */
+.plate{position:relative;margin:0;border:1px solid var(--line-strong);background:var(--surface);overflow:hidden}
+.plate img{width:100%;aspect-ratio:16/7;object-fit:cover}
+.plate.tall img{aspect-ratio:16/9}
+.plate figcaption{display:flex;flex-wrap:wrap;justify-content:space-between;gap:6px 16px;padding:10px 14px;border-top:1px solid var(--line-strong);font-family:var(--font-mono);font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.plate figcaption b{color:var(--ink);font-weight:500}
+.brandrow{display:grid;grid-template-columns:minmax(0,1fr);gap:28px;align-items:center;margin-block:36px}
+@media (min-width:760px){ .brandrow{grid-template-columns:200px minmax(0,1fr)} }
+.logo{width:200px;max-width:100%;aspect-ratio:1/1;border-radius:50%;overflow:hidden;border:1px solid var(--line-strong);background:#000}
+.logo img{width:100%;height:100%;object-fit:cover}
+.gal-group{margin-top:44px}
+.gal-head{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:8px 20px;margin-bottom:14px;padding-bottom:8px;border-bottom:1px solid var(--line-strong)}
+.gal-head h3{font-size:1.5rem;text-transform:uppercase;letter-spacing:.03em}
+.gal-head p{font-family:var(--font-mono);font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.gallery{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));grid-auto-flow:dense;gap:8px}
+@media (min-width:640px){ .gallery{grid-template-columns:repeat(4,minmax(0,1fr))} }
+.tile{position:relative;margin:0;padding:0;border:1px solid var(--line-strong);background:var(--surface);overflow:hidden;cursor:zoom-in;aspect-ratio:4/3;width:100%;text-align:left}
+.tile.wide{grid-column:span 2}
+.tile img{width:100%;height:100%;object-fit:cover;transition:transform .5s ease}
+.tile:hover img{transform:scale(1.035)}
+.tile .cap{position:absolute;left:0;right:0;bottom:0;padding:8px 10px;font-family:var(--font-mono);font-size:.64rem;letter-spacing:.08em;text-transform:uppercase;color:#fff;background:linear-gradient(to top,rgba(0,0,0,.72),rgba(0,0,0,0));opacity:0;transition:opacity .25s ease}
+.tile:hover .cap,.tile:focus-visible .cap{opacity:1}
+@media (hover:none){ .tile .cap{opacity:1} }
+.shoprow{display:grid;gap:24px;margin-top:48px;align-items:end}
+@media (min-width:900px){ .shoprow{grid-template-columns:minmax(0,1.5fr) minmax(0,1fr)} }
+
+/* ---------- off the clock ---------- */
+.wide-plate img{aspect-ratio:21/9}
+.volunteer{list-style:none;margin:16px 0 0;padding:0;display:grid;gap:8px}
+.volunteer li{display:grid;grid-template-columns:18px 1fr;gap:12px;align-items:start}
+.volunteer li::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--river);margin-top:.55em}
+
+/* ---------- contact ---------- */
+.contact{display:grid;gap:32px 56px}
+@media (min-width:900px){ .contact{grid-template-columns:minmax(0,1.2fr) minmax(0,1fr)} }
+.email{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin:18px 0 22px}
+.email code{font-family:var(--font-mono);font-size:1.05rem;padding:10px 14px;border:1px solid var(--line-strong);background:var(--surface);user-select:all;word-break:break-all}
+.copy{padding:10px 14px;border:1px solid var(--line-strong);background:var(--surface);cursor:pointer;font-family:var(--font-mono);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;border-radius:2px}
+.copy:hover{border-color:var(--ink)}
+.refs{list-style:none;margin:12px 0 0;padding:0;display:grid;gap:12px}
+.refs li{padding-left:14px;border-left:2px solid var(--line-strong)}
+.refs b{font-family:var(--font-display);font-weight:600;font-size:1.15rem;display:block;line-height:1.1}
+.refs span{color:var(--muted);font-size:.95rem}
+
+/* ---------- title block ---------- */
+.titleblock{margin-top:24px;border:2px solid var(--line-strong);display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}
+@media (min-width:760px){ .titleblock{grid-template-columns:2fr 1fr 1fr 1fr 1fr 1fr} }
+.tbk{padding:10px 14px;border-right:1px solid var(--line-strong);border-bottom:1px solid var(--line-strong);min-width:0}
+.tbk .k{font-family:var(--font-mono);font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);display:block}
+.tbk .v{font-family:var(--font-display);font-weight:600;font-size:1.2rem;line-height:1.15;letter-spacing:.02em;text-transform:uppercase;display:block;overflow-wrap:anywhere}
+.revs{grid-column:1 / -1;border-bottom:0;padding:0}
+.revs table{width:100%;border-collapse:collapse}
+.revs th,.revs td{font-family:var(--font-mono);font-size:.7rem;letter-spacing:.06em;text-align:left;padding:8px 14px;border-top:1px solid var(--line)}
+.revs th{color:var(--muted);text-transform:uppercase;font-weight:500;border-top:0}
+.revs td:first-child,.revs th:first-child{width:4rem}
+.colophon{margin-top:14px;font-family:var(--font-mono);font-size:.68rem;letter-spacing:.06em;color:var(--muted);display:flex;flex-wrap:wrap;gap:6px 20px;justify-content:space-between}
+
+/* ---------- lightbox ---------- */
+dialog.lb{border:0;padding:0;background:transparent;max-width:min(96vw,1400px);width:auto;max-height:96vh;margin:auto}
+dialog.lb::backdrop{background:rgba(10,8,7,.86)}
+.lb-inner{position:relative;display:grid;grid-template-rows:minmax(0,1fr) auto;max-height:96vh}
+.lb-inner img{max-width:min(96vw,1400px);max-height:84vh;width:auto;height:auto;object-fit:contain;margin:0 auto;border:1px solid var(--line-strong);background:#000}
+.lb-cap{color:#eee;font-family:var(--font-mono);font-size:.74rem;letter-spacing:.1em;text-transform:uppercase;text-align:center;padding:12px 60px}
+.lb-btn{position:absolute;top:50%;transform:translateY(-50%);width:44px;height:44px;border-radius:50%;border:1px solid rgba(255,255,255,.5);background:rgba(0,0,0,.45);color:#fff;cursor:pointer;display:grid;place-items:center}
+.lb-btn.prev{left:8px}.lb-btn.next{right:8px}
+.lb-btn.close{top:8px;right:8px;transform:none}
+.lb-btn svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.lb-btn:hover{background:rgba(255,255,255,.18)}
+</style>
+
+<div class="sheet">
+  <div class="zones" aria-hidden="true"><span>A</span><span>B</span><span>C</span><span>D</span></div>
+
+  <header class="titlebar">
+    <div class="tb-field brand"><span class="k">Name</span><span class="v">Jordan Yoerger</span></div>
+    <div class="tb-field"><span class="k">Drawing</span><span class="v">Portfolio</span></div>
+    <div class="tb-field rev"><span class="k">Rev</span><span class="v">C</span></div>
+    <nav class="tb-nav" aria-label="Sections">
+      <a href="#work"><span class="sup">A</span>Work</a>
+      <a href="#education"><span class="sup">B</span>Education</a>
+      <a href="#skills"><span class="sup">C</span>Skills</a>
+      <a href="#yoergoods"><span class="sup">D</span>Yoergoods</a>
+      <a href="#offclock"><span class="sup">E</span>Off the clock</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <main>
+    <!-- MAIN VIEW -->
+    <section class="hero" id="top">
+      <div>
+        <p class="eyebrow mono">Hi, I'm Jordan. &nbsp;·&nbsp; Stow, Ohio</p>
+        <h1>I love adventure. I love challenges. <em>I love people.</em></h1>
+        <p class="lede">I'm the <b>Director of Enterprise Technology Portfolio &amp; Delivery at Great Day Improvements</b>. Mechanical engineer by trade, MBA and PMP by training, a fine woodworker under the Yoergoods name on nights and weekends, and lately obsessed with vibe coding and whatever the AI world shipped this week. Creative, teamwork driven, and a proven problem solver.</p>
+        <div class="actions">
+          <a class="btn primary" href="#work">See the work
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12l7 7 7-7"/></svg></a>
+          <a class="btn" href="Jordan-Yoerger-Resume-2026.pdf" target="_blank" rel="noopener">Résumé
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17L17 7M8 7h9v9"/></svg></a>
+          <a class="btn" href="https://www.linkedin.com/in/jordan-yoerger" target="_blank" rel="noopener">LinkedIn
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17L17 7M8 7h9v9"/></svg></a>
+        </div>
+      </div>
+
+      <div class="figure">
+        <figure class="portrait">
+          <div class="frame"><img src="img/headshot.jpg" width="768" height="1024" alt="Jordan Yoerger in a navy blazer and checked shirt, smiling, against a blue studio background" fetchpriority="high"></div>
+          <div class="dim"><span>Fig. 1 &nbsp;·&nbsp; Main view</span></div>
+        </figure>
+      </div>
+      <ol class="callouts" aria-label="What's on this sheet">
+          <li class="callout" style="--i:0"><a href="#work"><span class="balloon">A</span><span><span class="cl-text">Program &amp; portfolio leader</span><span class="cl-sub">Eight years of programs · one PMO from scratch</span></span></a></li>
+          <li class="callout" style="--i:1"><a href="#education"><span class="balloon">B</span><span><span class="cl-text">Mechanical engineer by trade</span><span class="cl-sub">B.S. MET · MBA · PMP</span></span></a></li>
+          <li class="callout" style="--i:2"><a href="#skills"><span class="balloon">C</span><span><span class="cl-text">Waterfall, agile, AI tooling</span><span class="cl-sub">Bill of materials · 65 items</span></span></a></li>
+          <li class="callout" style="--i:3"><a href="#yoergoods"><span class="balloon">D</span><span><span class="cl-text">Fine woodworker</span><span class="cl-sub">Yoergoods · est. 2015</span></span></a></li>
+          <li class="callout" style="--i:4"><a href="#offclock"><span class="balloon">E</span><span><span class="cl-text">Traveler, mentor, volunteer</span><span class="cl-sub">Off the clock</span></span></a></li>
+        </ol>
+    </section>
+
+    <!-- DETAIL A -->
+    <section class="detail" id="work">
+      <header class="detail-head">
+        <div class="detail-tag"><span class="balloon">A</span><div><span class="sub">Detail A</span><h2>Work history</h2></div></div>
+        <p class="detail-note">2009 – present · 12 roles · 9 organizations</p>
+      </header>
+
+      <div class="two-col" style="margin-bottom:36px">
+        <div class="prose">
+          <p>Eight years leading programs and fifteen in manufacturing: consumer products, construction equipment, tire innovation, polymer processing, injection molding, and topical drug products. I specialize in PMO standards and continuous improvement, global product launches, stakeholder engagement, and the unglamorous disciplines of risk, scope, budget, and resource management. At Fortune Brands Innovations that added up to $80M in projected incremental net sales from projects launched over three years.</p>
+          <p>Today I lead Enterprise Technology Portfolio &amp; Delivery at Great Day Improvements, where I stood up the Enterprise PMO from the ground up in four months and now run the portfolio across ERP, CRM, and product development for more than a dozen home improvement brands.</p>
+        </div>
+        <div class="prose">
+          <p>The chart is drawn to scale, the way I'd draw a program plan: one column per year, most recent role at the top. Blue bars are program and portfolio leadership, walnut bars are engineering, grey bars are the co-ops and shop floor where it started.</p>
+          <div class="legend"><span><i></i>Program &amp; portfolio</span><span><i class="eng"></i>Engineering</span><span><i class="found"></i>Foundations</span><span><i class="now"></i>Today</span></div>
+        </div>
+      </div>
+
+      <div class="gantt" id="gantt">
+        <div class="g-axis"><div class="g-label">Role / organization</div><div class="g-years" id="years"></div></div>
+
+        <div class="g-row"><div class="g-label"><span class="g-role">Director, Enterprise Technology Portfolio &amp; Delivery</span><span class="g-org">Great Day Improvements · Twinsburg, OH</span><span class="g-dates">Jan 2026 – Present</span></div><div class="g-track"><span class="g-bar present" data-start="2026-01" data-end="present" style="--d:0"></span></div></div>
+        <div class="g-row"><div class="g-label"><span class="g-role">Senior Manager, Global Project Management</span><span class="g-org">Momentive Technologies · Strongsville, OH</span><span class="g-dates">Jul 2025 – Jan 2026</span></div><div class="g-track"><span class="g-bar" data-start="2025-07" data-end="2026-01" style="--d:1"></span></div></div>
+        <div class="g-row"><div class="g-label"><span class="g-role">Senior Project Manager / Project Manager</span><span class="g-org">Fortune Brands Innovations · The House of Rohl, Moen · North Olmsted, OH</span><span class="g-dates">Jan 2022 – Jul 2025</span></div><div class="g-track"><span class="g-bar" data-start="2022-01" data-end="2025-07" style="--d:2"></span></div></div>
+        <div class="g-row"><div class="g-label"><span class="g-role">Global Project Manager</span><span class="g-org">GOJO Industries · Akron, OH</span><span class="g-dates">Nov 2020 – Jan 2022</span></div><div class="g-track"><span class="g-bar" data-start="2020-11" data-end="2022-01" style="--d:3"></span></div></div>
+        <div class="g-row"><div class="g-label"><span class="g-role">Program Manager</span><span class="g-org">Carlisle Brake &amp; Friction · Solon, OH</span><span class="g-dates">Mar 2018 – Jun 2020</span></div><div class="g-track"><span class="g-bar" data-start="2018-03" data-end="2020-06" style="--d:4"></span></div></div>
+        <div class="g-row"><div class="g-label"><span class="g-role">Product Development Engineer</span><span class="g-org">Carlisle Brake &amp; Friction · Hawk Performance Racing</span><span class="g-dates">May 2016 – Mar 2018</span></div><div class="g-track"><span class="g-bar eng" data-start="2016-05" data-end="2018-03" style="--d:5"></span></div></div>
+        <div class="g-row"><div class="g-label"><span class="g-role">Research Assistant</span><span class="g-org">The University of Akron</span><span class="g-dates">Aug 2011 – May 2016</span></div><div class="g-track"><span class="g-bar eng" data-start="2011-08" data-end="2016-05" style="--d:6"></span></div></div>
+        <div class="g-row"><div class="g-label"><span class="g-role">Engineering Co-op</span><span class="g-org">Bridgestone Tire</span><span class="g-dates">May 2015 – Sep 2015</span></div><div class="g-track"><span class="g-bar found" data-start="2015-05" data-end="2015-09" style="--d:7"></span></div></div>
+        <div class="g-row"><div class="g-label"><span class="g-role">Engineering Co-op</span><span class="g-org">TTI Floorcare North America</span><span class="g-dates">May 2014 – Sep 2014</span></div><div class="g-track"><span class="g-bar found" data-start="2014-05" data-end="2014-09" style="--d:8"></span></div></div>
+        <div class="g-row"><div class="g-label"><span class="g-role">Engineering Co-op</span><span class="g-org">NPK Construction Equipment</span><span class="g-dates">Dec 2012 – Jan 2014</span></div><div class="g-track"><span class="g-bar found" data-start="2012-12" data-end="2014-01" style="--d:9"></span></div></div>
+        <div class="g-row"><div class="g-label"><span class="g-role">Machinist Apprentice &amp; Mold Operator</span><span class="g-org">Esterle Mold &amp; Machine</span><span class="g-dates">Jan 2010 – Jan 2012</span></div><div class="g-track"><span class="g-bar found" data-start="2010-01" data-end="2012-01" style="--d:10"></span></div></div>
+        <div class="g-row"><div class="g-label"><span class="g-role">Sales Associate</span><span class="g-org">FinishLine</span><span class="g-dates">Mar 2009 – Jun 2010</span></div><div class="g-track"><span class="g-bar found" data-start="2009-03" data-end="2010-06" style="--d:11"></span></div></div>
+      </div>
+
+      <div class="hl-head"><h3>Role highlights</h3><p>What each bar actually delivered</p></div>
+      <div class="highlights">
+        <article class="hl">
+          <h4>Director, Enterprise Technology Portfolio &amp; Delivery</h4>
+          <p class="hl-org">Great Day Improvements · Jan 2026 – present</p>
+          <ul>
+            <li>Stood up the Enterprise PMO from the ground up in four months: governance framework, intake and prioritization, methodology, and reporting standards.</li>
+            <li>Run portfolio delivery across ERP, CRM, and product development for 12+ home improvement brands, with one consolidated executive dashboard for every Tier 1 and Tier 2 project.</li>
+            <li>Built a suite of internal tools with Claude (Resource Manager, Accounting Treatment Calculator, Project Priority Scoring Calculator, SME Repository) and co-lead development of an internal LLM for enterprise productivity.</li>
+            <li>Own vendor relationships for ERP, CRM, and other strategic platforms, and present portfolio status and KPIs to the steering committee on a regular cadence.</li>
+          </ul>
+        </article>
+        <article class="hl">
+          <h4>Senior Manager, Global Project Management</h4>
+          <p class="hl-org">Momentive Technologies · Jul 2025 – Jan 2026</p>
+          <ul>
+            <li>Built a centralized PMO with governance frameworks and standard methodology across every business unit.</li>
+            <li>Directed a global CapEx and cross-functional portfolio, reviewing and approving the NPV, IRR, and cash-flow models behind each investment.</li>
+            <li>Mentored a team of project managers and engineers, ran portfolio reviews, and used LLM tooling to build internal apps for continuous improvement.</li>
+          </ul>
+        </article>
+        <article class="hl">
+          <h4>Senior Project Manager / Project Manager</h4>
+          <p class="hl-org">Fortune Brands Innovations · Jan 2022 – Jul 2025</p>
+          <ul>
+            <li>$80M in forecasted incremental net sales from launches over three years, while managing a product roadmap valued at roughly $160M.</li>
+            <li>Led a $50–60M global product-development portfolio with 100+ team members; The House of Rohl's subject matter expert for new product introductions and stage-gate reviews with the C-suite.</li>
+            <li>Onboarded four project managers (PMO capacity up 200%), standardized templates across three business units, directed tariff mitigation, and used generative AI to cut routine PM work by at least half.</li>
+          </ul>
+        </article>
+        <article class="hl">
+          <h4>Global Project Manager</h4>
+          <p class="hl-org">GOJO Industries · Nov 2020 – Jan 2022</p>
+          <ul>
+            <li>Led global growth projects and regional alignment calls, including clinical research studies with hospital personnel and consultants.</li>
+            <li>Introduced Smartsheet to streamline workflow, kept launches inside regulatory requirements, and mentored summer co-ops.</li>
+          </ul>
+        </article>
+        <article class="hl">
+          <h4>Program Manager, then Product Development Engineer</h4>
+          <p class="hl-org">Carlisle Brake &amp; Friction · May 2016 – Jun 2020</p>
+          <ul>
+            <li>Managed $60M NPI and $200M product portfolios across the aftermarket racing brake and off-highway friction divisions.</li>
+            <li>Made Smartsheet the enterprise standard for program managers and presented monthly executive project reviews with risk and rationalization plans.</li>
+            <li>Started as a Product Development Engineer on NPI launches for the Hawk Performance Racing division.</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <!-- DETAIL B -->
+    <section class="detail" id="education">
+      <header class="detail-head">
+        <div class="detail-tag"><span class="balloon">B</span><div><span class="sub">Detail B</span><h2>Education &amp; credentials</h2></div></div>
+        <p class="detail-note">2 degrees · 1 certification · 55 PDUs</p>
+      </header>
+      <div class="two-col">
+        <div>
+          <div class="cred">
+            <div class="cred-row">
+              <div class="cred-when">Aug 2022 – Aug 2024</div>
+              <div class="cred-what"><h3>MBA, Executive Management</h3><p>Ashland University · Ashland, Ohio · Project Management specialization</p></div>
+              <div class="cred-meta num">GPA <b>3.97</b></div>
+            </div>
+            <div class="cred-row">
+              <div class="cred-when">Aug 2011 – May 2016</div>
+              <div class="cred-what"><h3>B.S. Mechanical Engineering Technology</h3><p>The University of Akron · Akron, Ohio · Undergraduate research assistant; co-ops at NPK Construction Equipment, TTI Floorcare (Hoover), and Bridgestone Tire</p></div>
+              <div class="cred-meta num">GPA <b>3.4</b></div>
+            </div>
+            <div class="cred-row">
+              <div class="cred-when">Jun 2025</div>
+              <div class="cred-what"><h3>Project Management Professional (PMP)</h3><p>Project Management Institute · obtained June 24, 2025</p></div>
+              <div class="cred-meta num">No. <b>4130432</b></div>
+            </div>
+          </div>
+        </div>
+        <div class="sidebox">
+          <h3>Continuing education</h3>
+          <span class="mono">Professional development units</span>
+          <table class="courses">
+            <thead><tr><th>Course</th><th>PDU</th></tr></thead>
+            <tbody>
+              <tr><td>Project Management Principles</td><td class="num">21</td></tr>
+              <tr><td>Leadership &amp; Management Skills for Non-Managers</td><td class="num">21</td></tr>
+              <tr><td>Engineering Project Management</td><td class="num">13</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- DETAIL C -->
+    <section class="detail" id="skills">
+      <header class="detail-head">
+        <div class="detail-tag"><span class="balloon">C</span><div><span class="sub">Detail C</span><h2>Bill of materials</h2></div></div>
+        <p class="detail-note">7 groups · 65 items · Skills &amp; tools</p>
+      </header>
+      <div class="two-col" style="margin-bottom:36px">
+        <div class="prose">
+          <p>I'm obsessed with vibe coding. I describe the tool I need, let Claude Code or Copilot build it with me, and ship it the same afternoon. Most of the dashboards, generators, and automations I run at work now start as a conversation, and the bill of materials below has a whole row of things that didn't exist on it two years ago.</p>
+        </div>
+        <div class="prose">
+          <p>Off hours go to keeping up with the cutting edge of the AI world: new models the week they drop, agents, MCP servers, the next thing after that. A mechanical engineer never stops wanting to see how the machine works, and right now this is the most interesting machine there is.</p>
+        </div>
+      </div>
+      <div class="bom">
+        <div class="bom-row head"><span>Item</span><span>Qty</span><span>Description · Specification</span></div>
+        <div class="bom-row">
+          <div class="bom-item">1</div><div class="bom-qty num">15</div>
+          <div class="bom-desc"><h3>Program &amp; portfolio delivery</h3>
+            <div class="chips"><span class="chip hi">Project management</span><span class="chip hi">Portfolio management (PPM)</span><span class="chip">PMBOK</span><span class="chip hi">Waterfall &amp; agile</span><span class="chip">Lean Six Sigma</span><span class="chip hi">PMO standards &amp; continuous improvement</span><span class="chip">Risk management</span><span class="chip">Change management</span><span class="chip">Resource allocation</span><span class="chip">Budget oversight</span><span class="chip">Vendor management</span><span class="chip">Stakeholder engagement</span><span class="chip">Lessons learned</span><span class="chip hi">Smartsheet</span><span class="chip">Microsoft Project</span></div></div>
+        </div>
+        <div class="bom-row">
+          <div class="bom-item">2</div><div class="bom-qty num">12</div>
+          <div class="bom-desc"><h3>AI &amp; automation</h3>
+            <div class="chips"><span class="chip hi">Claude</span><span class="chip hi">Claude Code</span><span class="chip hi">Microsoft 365 Copilot</span><span class="chip">ChatGPT</span><span class="chip">Gemini</span><span class="chip">Grok</span><span class="chip">Generative AI for PMs</span><span class="chip">App generation with Copilot &amp; GitHub</span><span class="chip">GitHub</span><span class="chip">Streamlit</span><span class="chip">Agentic workflows</span><span class="chip">PowerShell automation</span></div></div>
+        </div>
+        <div class="bom-row">
+          <div class="bom-item">3</div><div class="bom-qty num">8</div>
+          <div class="bom-desc"><h3>Product &amp; commercialization</h3>
+            <div class="chips"><span class="chip hi">Global product launches</span><span class="chip">Product planning</span><span class="chip">Product roadmap</span><span class="chip">Product commercialization</span><span class="chip">Stage-gate reviews</span><span class="chip">Prototyping</span><span class="chip">Product validation</span><span class="chip">Global product compliance</span></div></div>
+        </div>
+        <div class="bom-row">
+          <div class="bom-item">4</div><div class="bom-qty num">10</div>
+          <div class="bom-desc"><h3>Reporting &amp; analytics</h3>
+            <div class="chips"><span class="chip hi">Dashboard reporting</span><span class="chip hi">Power BI</span><span class="chip">Tableau</span><span class="chip">QlikView</span><span class="chip">Excel</span><span class="chip">Access</span><span class="chip">SharePoint design</span><span class="chip">Lucid</span><span class="chip">PowerPoint</span><span class="chip">Word</span></div></div>
+        </div>
+        <div class="bom-row">
+          <div class="bom-item">5</div><div class="bom-qty num">11</div>
+          <div class="bom-desc"><h3>Engineering &amp; manufacturing</h3>
+            <div class="chips"><span class="chip hi">Creo / Pro-E</span><span class="chip">SolidWorks</span><span class="chip">AutoCAD</span><span class="chip">3D modeling</span><span class="chip">SAP</span><span class="chip">PLM</span><span class="chip">QAD</span><span class="chip">Machining</span><span class="chip">Material testing</span><span class="chip">Quality assurance &amp; control</span><span class="chip">Technical literature</span></div></div>
+        </div>
+        <div class="bom-row">
+          <div class="bom-item">6</div><div class="bom-qty num">7</div>
+          <div class="bom-desc"><h3>Leadership</h3>
+            <div class="chips"><span class="chip hi">Team leadership</span><span class="chip">Mentoring</span><span class="chip">Public speaking</span><span class="chip">Staffing</span><span class="chip">Conflict management</span><span class="chip">Stakeholder management</span><span class="chip">Financial acumen</span></div></div>
+        </div>
+        <div class="bom-row">
+          <div class="bom-item">7</div><div class="bom-qty num">2</div>
+          <div class="bom-desc"><h3>Creative</h3>
+            <div class="chips"><span class="chip">Adobe Photoshop</span><span class="chip">Sony Vegas</span></div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- DETAIL D -->
+    <section class="detail" id="yoergoods">
+      <header class="detail-head">
+        <div class="detail-tag"><span class="balloon">D</span><div><span class="sub">Detail D</span><h2>Yoergoods</h2></div></div>
+        <p class="detail-note">Fine woodworking · est. 2015 · shop est. 2020</p>
+      </header>
+
+      <figure class="plate">
+        <img src="img/river.jpg" width="1400" height="932" alt="Two live-edge walnut coffee tables with blue epoxy rivers, standing on a lawn">
+        <figcaption><span><b>Fig. 2</b> · Live-edge river tables</span><span>Black walnut · blue epoxy · hairpin legs</span></figcaption>
+      </figure>
+
+      <div class="brandrow">
+        <div class="logo"><img src="img/yoergoods-logo.jpg" width="640" height="640" alt="Yoergoods logo: two crossed axes inside a circle, established 2015"></div>
+        <div class="prose">
+          <p>I started woodworking at a young age, and in college I found a niche for fine woodworking. I make small projects, furniture, and retail fronts under the Yoergoods name: live-edge slabs, epoxy rivers, bowtie inlays, and the occasional coffee shop.</p>
+          <p style="margin-top:14px"><a class="btn" href="https://www.youtube.com/channel/UCfyi_dNEGDAFqiSrsa8SmKQ" target="_blank" rel="noopener">Yoergoods on YouTube
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17L17 7M8 7h9v9"/></svg></a></p>
+        </div>
+      </div>
+
+      <div class="gal-group">
+        <div class="gal-head"><h3>Retail fronts</h3><p>Bent Tree Coffee remodel · Kent, Ohio · 2016</p></div>
+        <div class="gallery" data-group="retail">
+                    <button class="tile wide" type="button" data-full="img/gal-04.jpg"><img src="img/gal-04.jpg" width="1000" height="752" alt="Counter and retail wall, Bent Tree Coffee" loading="lazy"><span class="cap">Counter and retail wall, Bent Tree Coffee</span></button>
+          <button class="tile" type="button" data-full="img/gal-03.jpg"><img src="img/gal-03.jpg" width="950" height="714" alt="Bean shelf with log-slice card holders" loading="lazy"><span class="cap">Bean shelf with log-slice card holders</span></button>
+          <button class="tile" type="button" data-full="img/gal-12.jpg"><img src="img/gal-12.jpg" width="1000" height="1249" alt="Black Squirrel Blend display" loading="lazy"><span class="cap">Black Squirrel Blend display</span></button>
+          <button class="tile wide" type="button" data-full="img/gal-18.jpg"><img src="img/gal-18.jpg" width="1000" height="750" alt="Communal tables, built to order" loading="lazy"><span class="cap">Communal tables, built to order</span></button>
+          <button class="tile" type="button" data-full="img/gal-07.jpg"><img src="img/gal-07.jpg" width="1000" height="750" alt="Window tables on hairpin legs" loading="lazy"><span class="cap">Window tables on hairpin legs</span></button>
+          <button class="tile" type="button" data-full="img/gal-10.jpg"><img src="img/gal-10.jpg" width="1000" height="1500" alt="Communal table in use" loading="lazy"><span class="cap">Communal table in use</span></button>
+          <button class="tile" type="button" data-full="img/gal-16.jpg"><img src="img/gal-16.jpg" width="1000" height="648" alt="Retail shelving and cooler surround" loading="lazy"><span class="cap">Retail shelving and cooler surround</span></button>
+          <button class="tile" type="button" data-full="img/gal-05.jpg"><img src="img/gal-05.jpg" width="1000" height="750" alt="Window bar" loading="lazy"><span class="cap">Window bar</span></button>
+          <button class="tile" type="button" data-full="img/gal-13.jpg"><img src="img/gal-13.jpg" width="1000" height="784" alt="Bean wall and bagging station" loading="lazy"><span class="cap">Bean wall and bagging station</span></button>
+          <button class="tile" type="button" data-full="img/gal-02.jpg"><img src="img/gal-02.jpg" width="970" height="729" alt="Reclaimed-wood tabletop" loading="lazy"><span class="cap">Reclaimed-wood tabletop</span></button>
+        </div>
+      </div>
+
+      <div class="gal-group">
+        <div class="gal-head"><h3>Furniture</h3><p>Tables · beds · benches · casework</p></div>
+        <div class="gallery" data-group="furniture">
+                    <button class="tile wide" type="button" data-full="img/gal-36.jpg"><img src="img/gal-36.jpg" width="1000" height="750" alt="River coffee table, walnut and blue epoxy" loading="lazy"><span class="cap">River coffee table, walnut and blue epoxy</span></button>
+          <button class="tile" type="button" data-full="img/gal-42.jpg"><img src="img/gal-42.jpg" width="1000" height="1171" alt="Live-edge slab table with bowtie inlay" loading="lazy"><span class="cap">Live-edge slab table with bowtie inlay</span></button>
+          <button class="tile" type="button" data-full="img/gal-24.jpg"><img src="img/gal-24.jpg" width="1000" height="750" alt="Bed with epoxy-river headboard" loading="lazy"><span class="cap">Bed with epoxy-river headboard</span></button>
+          <button class="tile" type="button" data-full="img/gal-38.jpg"><img src="img/gal-38.jpg" width="1000" height="750" alt="River table, detail" loading="lazy"><span class="cap">River table, detail</span></button>
+          <button class="tile" type="button" data-full="img/gal-35.jpg"><img src="img/gal-35.jpg" width="1000" height="750" alt="Live-edge headboard bed" loading="lazy"><span class="cap">Live-edge headboard bed</span></button>
+          <button class="tile wide" type="button" data-full="img/gal-32.jpg"><img src="img/gal-32.jpg" width="1000" height="750" alt="Mid-century credenza" loading="lazy"><span class="cap">Mid-century credenza</span></button>
+          <button class="tile" type="button" data-full="img/gal-31.jpg"><img src="img/gal-31.jpg" width="1000" height="750" alt="Pair of hairpin side tables" loading="lazy"><span class="cap">Pair of hairpin side tables</span></button>
+          <button class="tile" type="button" data-full="img/gal-29.jpg"><img src="img/gal-29.jpg" width="1000" height="750" alt="Bench with through-tenon stretcher" loading="lazy"><span class="cap">Bench with through-tenon stretcher</span></button>
+          <button class="tile" type="button" data-full="img/gal-45.jpg"><img src="img/gal-45.jpg" width="1000" height="750" alt="Bowtie inlay, detail" loading="lazy"><span class="cap">Bowtie inlay, detail</span></button>
+          <button class="tile" type="button" data-full="img/gal-48.jpg"><img src="img/gal-48.jpg" width="1000" height="750" alt="Hairpin coffee table" loading="lazy"><span class="cap">Hairpin coffee table</span></button>
+          <button class="tile" type="button" data-full="img/gal-20.jpg"><img src="img/gal-20.jpg" width="1000" height="750" alt="Bench with epoxy inlay" loading="lazy"><span class="cap">Bench with epoxy inlay</span></button>
+          <button class="tile" type="button" data-full="img/gal-27.jpg"><img src="img/gal-27.jpg" width="1000" height="750" alt="Platform bed" loading="lazy"><span class="cap">Platform bed</span></button>
+          <button class="tile" type="button" data-full="img/gal-22.jpg"><img src="img/gal-22.jpg" width="1000" height="750" alt="River slab, detail" loading="lazy"><span class="cap">River slab, detail</span></button>
+          <button class="tile" type="button" data-full="img/gal-08.jpg"><img src="img/gal-08.jpg" width="1000" height="1333" alt="Live-edge walnut desk" loading="lazy"><span class="cap">Live-edge walnut desk</span></button>
+        </div>
+      </div>
+
+      <div class="gal-group">
+        <div class="gal-head"><h3>Small projects</h3><p>Boards · racks · signs · gifts</p></div>
+        <div class="gallery" data-group="small">
+                    <button class="tile wide" type="button" data-full="img/gal-55.jpg"><img src="img/gal-55.jpg" width="1000" height="623" alt="Striped cutting board" loading="lazy"><span class="cap">Striped cutting board</span></button>
+          <button class="tile" type="button" data-full="img/gal-53.jpg"><img src="img/gal-53.jpg" width="1000" height="802" alt="Framed Cleveland prints" loading="lazy"><span class="cap">Framed Cleveland prints</span></button>
+          <button class="tile" type="button" data-full="img/gal-58.jpg"><img src="img/gal-58.jpg" width="1000" height="1333" alt="Pipe-frame pour-over stand" loading="lazy"><span class="cap">Pipe-frame pour-over stand</span></button>
+          <button class="tile" type="button" data-full="img/gal-59.jpg"><img src="img/gal-59.jpg" width="1000" height="750" alt="Laminated paddle" loading="lazy"><span class="cap">Laminated paddle</span></button>
+          <button class="tile" type="button" data-full="img/gal-69.jpg"><img src="img/gal-69.jpg" width="1000" height="750" alt="Round walnut serving board" loading="lazy"><span class="cap">Round walnut serving board</span></button>
+          <button class="tile wide" type="button" data-full="img/gal-65.jpg"><img src="img/gal-65.jpg" width="1000" height="750" alt="Live-edge blanket ladder" loading="lazy"><span class="cap">Live-edge blanket ladder</span></button>
+          <button class="tile" type="button" data-full="img/gal-52.jpg"><img src="img/gal-52.jpg" width="1000" height="750" alt="Pair of laminated paddles" loading="lazy"><span class="cap">Pair of laminated paddles</span></button>
+          <button class="tile" type="button" data-full="img/gal-51.jpg"><img src="img/gal-51.jpg" width="1000" height="750" alt="River serving board" loading="lazy"><span class="cap">River serving board</span></button>
+          <button class="tile" type="button" data-full="img/gal-66.jpg"><img src="img/gal-66.jpg" width="1000" height="750" alt="Valet tray" loading="lazy"><span class="cap">Valet tray</span></button>
+          <button class="tile" type="button" data-full="img/gal-70.jpg"><img src="img/gal-70.jpg" width="1000" height="1333" alt="Knife with figured handle" loading="lazy"><span class="cap">Knife with figured handle</span></button>
+          <button class="tile" type="button" data-full="img/gal-63.jpg"><img src="img/gal-63.jpg" width="1000" height="1000" alt="Tree-ring print" loading="lazy"><span class="cap">Tree-ring print</span></button>
+          <button class="tile" type="button" data-full="img/gal-41.jpg"><img src="img/gal-41.jpg" width="1000" height="750" alt="Carved Yoergoods sign" loading="lazy"><span class="cap">Carved Yoergoods sign</span></button>
+          <button class="tile" type="button" data-full="img/gal-25.jpg"><img src="img/gal-25.jpg" width="1000" height="750" alt="Live-edge coat rack" loading="lazy"><span class="cap">Live-edge coat rack</span></button>
+          <button class="tile" type="button" data-full="img/gal-54.jpg"><img src="img/gal-54.jpg" width="1000" height="750" alt="Burl block, branded" loading="lazy"><span class="cap">Burl block, branded</span></button>
+        </div>
+      </div>
+
+      <div class="shoprow">
+        <figure class="plate">
+          <img src="img/shop.jpg" width="1280" height="716" alt="The Yoergoods workshop in black and white: workbench, miter saw, lumber rack, and a flag on the wall" loading="lazy">
+          <figcaption><span><b>Fig. 3</b> · The shop</span><span>Established 2020</span></figcaption>
+        </figure>
+        <div class="prose">
+          <p>Everything above was built here. The shop went up in 2020: a bench, a rack of walnut and maple, a miter station, and enough clamps to almost be enough clamps.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- DETAIL E -->
+    <section class="detail" id="offclock">
+      <header class="detail-head">
+        <div class="detail-tag"><span class="balloon">E</span><div><span class="sub">Detail E</span><h2>Off the clock</h2></div></div>
+        <p class="detail-note">Travel · church · mentoring · volunteering</p>
+      </header>
+      <figure class="plate wide-plate">
+        <img src="img/hike.jpg" width="1280" height="530" alt="Jordan and a companion on a hike in front of a mossy rock face" loading="lazy">
+        <figcaption><span><b>Fig. 4</b> · On the trail</span><span>Adventure, preferably uphill</span></figcaption>
+      </figure>
+      <div class="two-col" style="margin-top:36px">
+        <div class="prose">
+          <p>I love to travel and experience new cultures whenever the opportunity presents itself. I'm active in my local church, where I mentor youth and adults, and I volunteer wherever I can be useful.</p>
+          <ul class="volunteer">
+            <li>Adult mentor for at-risk youth through Ohio's Child Protective Services</li>
+            <li>True North Ministries, Akron</li>
+            <li>India Gospel League</li>
+            <li>Joni and Friends</li>
+          </ul>
+        </div>
+        <figure class="plate tall">
+          <img src="img/india.jpg" width="960" height="507" alt="A large group photo in a classroom in India; several visitors wear marigold garlands" loading="lazy">
+          <figcaption><span><b>Fig. 5</b> · India Gospel League</span></figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section class="detail" id="contact">
+      <header class="detail-head">
+        <div class="detail-tag"><div><span class="sub">Notes</span><h2>Get in touch</h2></div></div>
+      </header>
+      <div class="contact">
+        <div class="prose">
+          <p>For roles, programs that need a steady hand, or a table that needs a river in it, email is best. I'm based in Stow, Ohio, and work hybrid out of Twinsburg.</p>
+          <div class="email"><a href="mailto:jgyoerger@gmail.com" style="text-decoration:none"><code id="email">jgyoerger@gmail.com</code></a><button class="copy" id="copy-email" type="button">Copy</button></div>
+          <div class="actions">
+            <a class="btn" href="Jordan-Yoerger-Resume-2026.pdf" target="_blank" rel="noopener">Résumé (PDF)
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17L17 7M8 7h9v9"/></svg></a>
+            <a class="btn" href="https://www.linkedin.com/in/jordan-yoerger" target="_blank" rel="noopener">LinkedIn
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17L17 7M8 7h9v9"/></svg></a>
+            <a class="btn" href="https://www.youtube.com/channel/UCfyi_dNEGDAFqiSrsa8SmKQ" target="_blank" rel="noopener">YouTube
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17L17 7M8 7h9v9"/></svg></a>
+          </div>
+        </div>
+        <div>
+          <span class="mono">References · contact details on request</span>
+          <ul class="refs">
+            <li><b>Mike Putre</b><span>Group Project Manager · Fortune Brands Innovations</span></li>
+            <li><b>Matthew Jereb</b><span>Product Line Director · Carlisle Brake &amp; Friction (previous)</span></li>
+            <li><b>Gregory Morscher</b><span>Associate Professor, Mechanical Engineering · The University of Akron</span></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="titleblock" aria-label="Title block">
+    <div class="tbk"><span class="k">Title</span><span class="v">Jordan Yoerger · Portfolio</span></div>
+    <div class="tbk"><span class="k">Drawn by</span><span class="v">J. Yoerger</span></div>
+    <div class="tbk"><span class="k">Date</span><span class="v num">2026-09-28</span></div>
+    <div class="tbk"><span class="k">Rev</span><span class="v">C</span></div>
+    <div class="tbk"><span class="k">Scale</span><span class="v">NTS</span></div>
+    <div class="tbk"><span class="k">Sheet</span><span class="v">1 of 1</span></div>
+    <div class="tbk revs">
+      <table>
+        <thead><tr><th>Rev</th><th>Date</th><th>Description</th></tr></thead>
+        <tbody>
+          <tr><td>A</td><td>—</td><td>Original portfolio published on Google Sites</td></tr>
+          <tr><td>B</td><td>2026-09-28</td><td>Redrawn as a single sheet: main view, five details, title block</td></tr>
+          <tr><td>C</td><td>2026-09-28</td><td>Content aligned to the 2026 résumé: role highlights, credentials, 65-item bill of materials, résumé PDF attached</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </footer>
+  <p class="colophon"><span>© 2026 Jordan Yoerger</span><span>Set in Barlow Condensed, Source Serif 4, and IBM Plex Mono</span></p>
+</div>
+
+<dialog class="lb" id="lb" aria-label="Photo viewer">
+  <div class="lb-inner">
+    <img id="lb-img" alt="">
+    <p class="lb-cap" id="lb-cap"></p>
+    <button class="lb-btn prev" id="lb-prev" type="button" aria-label="Previous photo"><svg viewBox="0 0 24 24"><path d="M15 6l-6 6 6 6"/></svg></button>
+    <button class="lb-btn next" id="lb-next" type="button" aria-label="Next photo"><svg viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg></button>
+    <button class="lb-btn close" id="lb-close" type="button" aria-label="Close"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+  </div>
+</dialog>
+
+<script>
+(function(){
+  // ---- Gantt: 216 months, Jan 2009 through Dec 2026, drawn to scale ----
+  var N = 216, Y0 = 2009;
+  function idx(s){ if(s==='present'){ var d=new Date(); return (d.getFullYear()-Y0)*12 + d.getMonth() + 1; } var p=s.split('-'); return (+p[0]-Y0)*12 + (+p[1]-1); }
+  var bars = document.querySelectorAll('.g-bar');
+  for (var i=0;i<bars.length;i++){
+    var b=bars[i], a=idx(b.getAttribute('data-start')), e=idx(b.getAttribute('data-end'));
+    b.style.left = (a/N*100)+'%';
+    b.style.width = (Math.max(e-a,1)/N*100)+'%';
+  }
+  var now = new Date(); var nowIdx = (now.getFullYear()-Y0)*12 + now.getMonth() + 0.5;
+  var gantt = document.getElementById('gantt');
+  gantt.style.setProperty('--now', (nowIdx/N*100)+'%');
+  var years = document.getElementById('years');
+  for (var y=0;y<18;y++){ var s=document.createElement('span'); s.textContent=Y0+y; s.style.left=(y/18*100)+'%'; if(y%2){s.className='odd';} years.appendChild(s); }
+  // play the bar animation once the chart is in view
+  if ('IntersectionObserver' in window && !matchMedia('(prefers-reduced-motion: reduce)').matches){
+    var io = new IntersectionObserver(function(en){ if(en[0].isIntersecting){ gantt.classList.add('play'); io.disconnect(); } }, {threshold:.2});
+    io.observe(gantt);
+  }
+
+  // ---- Scroll spy for the title strip ----
+  var links = Array.prototype.slice.call(document.querySelectorAll('.tb-nav a'));
+  var secs = links.map(function(l){ return document.querySelector(l.getAttribute('href')); }).filter(Boolean);
+  if ('IntersectionObserver' in window){
+    var spy = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){ if(en.isIntersecting){ links.forEach(function(l){ l.setAttribute('aria-current', l.getAttribute('href')==='#'+en.target.id ? 'true' : 'false'); }); } });
+    }, {rootMargin:'-40% 0px -55% 0px'});
+    secs.forEach(function(s){ spy.observe(s); });
+  }
+
+  // ---- Copy email ----
+  var copy = document.getElementById('copy-email'), em = document.getElementById('email');
+  copy.addEventListener('click', function(){
+    var t = em.textContent, done = function(){ copy.textContent='Copied'; setTimeout(function(){copy.textContent='Copy';},1600); };
+    var fallback = function(){ var r=document.createRange(); r.selectNodeContents(em); var sel=getSelection(); sel.removeAllRanges(); sel.addRange(r); copy.textContent='Selected'; setTimeout(function(){copy.textContent='Copy';},1600); };
+    if (navigator.clipboard && navigator.clipboard.writeText){ navigator.clipboard.writeText(t).then(done, fallback); } else { fallback(); }
+  });
+
+  // ---- Lightbox ----
+  var lb = document.getElementById('lb'), lbImg = document.getElementById('lb-img'), lbCap = document.getElementById('lb-cap');
+  var tiles = Array.prototype.slice.call(document.querySelectorAll('.tile')), cur = -1;
+  function show(i){
+    cur = (i + tiles.length) % tiles.length;
+    var t = tiles[cur], img = t.querySelector('img');
+    lbImg.src = t.getAttribute('data-full') || img.src; lbImg.alt = img.alt;
+    lbCap.textContent = (t.querySelector('.cap') ? t.querySelector('.cap').textContent : '') + '  ·  ' + (cur+1) + ' / ' + tiles.length;
+  }
+  tiles.forEach(function(t,i){ t.addEventListener('click', function(){ show(i); if (typeof lb.showModal==='function'){ lb.showModal(); } else { lb.setAttribute('open',''); } }); });
+  document.getElementById('lb-prev').addEventListener('click', function(){ show(cur-1); });
+  document.getElementById('lb-next').addEventListener('click', function(){ show(cur+1); });
+  document.getElementById('lb-close').addEventListener('click', function(){ lb.close(); });
+  lb.addEventListener('click', function(e){ if (e.target===lb){ lb.close(); } });
+  lb.addEventListener('keydown', function(e){ if(e.key==='ArrowLeft'){ show(cur-1); } else if(e.key==='ArrowRight'){ show(cur+1); } });
+})();
+</script>
+</body>
+</html>
