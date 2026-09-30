@@ -31,6 +31,7 @@
   --ink:#ffffff; --body:#dadbdf; --mute:#7d8187; --on-primary:#0a0a0a; --pill-line:rgba(255,255,255,.25);
   --sunset:#ff7a17; --sunset-soft:#ffc285; --dusk:#7c3aed; --twilight:#c4b5fd; --breeze:#a0c3ec;
   --ok:#6fd49a; --warn:#ffc285; --bad:#ff6b5e;
+  --ot:#F15C28; /* On Target Outfitters logo ground, sampled from their mark */
   --sans:"Geist",Inter,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
   --mono:"Geist Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
   color-scheme:dark;
@@ -203,6 +204,13 @@ button{font:inherit;color:inherit}
 .shop .photo img{aspect-ratio:16/9;height:auto}
 
 /* off the clock */
+.ot{display:grid;gap:16px;margin-bottom:16px}
+@media (min-width:900px){.ot{grid-template-columns:minmax(0,1fr) minmax(0,1.25fr)}}
+.ot-logo{margin:0;border-radius:8px;background:var(--ot);display:grid;place-items:center;padding:32px;min-height:220px}
+.ot-logo img{width:100%;max-width:400px;height:auto}
+.ot .card{display:flex;flex-direction:column;gap:16px}
+.facts{list-style:none;margin:0;padding:0;border-top:1px solid var(--hairline)}
+.facts li{display:flex;flex-wrap:wrap;justify-content:space-between;gap:4px 16px;padding:10px 0;border-bottom:1px solid var(--hairline);font-size:14px;line-height:20px;color:var(--body)}
 .wide-photo img{aspect-ratio:21/9;height:auto}
 .otc{display:grid;gap:16px;margin-top:16px}
 @media (min-width:900px){.otc{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}}
@@ -714,7 +722,24 @@ dialog.lb::backdrop{background:rgba(10,10,10,.92)}
     <div class="wrap">
       <div class="band-head">
         <p class="eyebrow">Off the clock</p>
-        <h2 class="d-md">Travel, church, mentoring, and volunteering.</h2>
+        <h2 class="d-md">Volunteering, travel, and church.</h2>
+      </div>
+      <div class="ot">
+        <figure class="ot-logo">
+          <img src="img/on-target-outfitters.png" width="399" height="211" alt="On Target Outfitters logo: an arrow through a crosshair">
+        </figure>
+        <div class="card">
+          <span class="cap">Volunteer</span>
+          <h3 class="d-sm">On Target Outfitters</h3>
+          <p class="lead">I volunteer with On Target Outfitters, a faith-based nonprofit that uses the outdoors to help kids grow. Caring mentors take them through archery, riflery, hunting, fishing, and camping, and the kids come away with new skills, confidence, and lasting friendships.</p>
+          <ul class="facts">
+            <li><span class="cap">Programs</span><span>Archery · riflery · hunting · fishing · camping</span></li>
+            <li><span class="cap">Chapters</span><span>Canfield · Findlay · Portage County, Ohio</span></li>
+            <li><span class="cap">Since</span><span>2008 · 501(c)(3) nonprofit</span></li>
+          </ul>
+          <div class="pills"><a class="pill" href="https://www.ontargetoutfitters.org/" target="_blank" rel="noopener">ontargetoutfitters.org
+            <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M5 11 11 5M6 5h5v5"/></svg></a></div>
+        </div>
       </div>
       <figure class="photo wide-photo">
         <img src="img/hike.jpg" width="1280" height="530" alt="Jordan and a companion on a hike in front of a mossy rock face" loading="lazy">
@@ -723,7 +748,8 @@ dialog.lb::backdrop{background:rgba(10,10,10,.92)}
       <div class="otc">
         <div class="card">
           <p class="lead">I love to travel and experience new cultures whenever the opportunity presents itself. I'm active in my local church, where I mentor youth and adults, and I volunteer wherever I can be useful.</p>
-          <ul class="vol">
+          <p class="cap" style="margin-top:24px">Also volunteered with</p>
+          <ul class="vol" style="margin-top:8px">
             <li>Adult mentor for at-risk youth through Ohio's Child Protective Services</li>
             <li>True North Ministries, Akron</li>
             <li>India Gospel League</li>
