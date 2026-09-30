@@ -92,7 +92,7 @@ button{font:inherit;color:inherit}
 .hero .lead{margin-top:32px;max-width:36em}
 .hero .pills{margin-top:32px}
 .portrait{margin:0;border:1px solid var(--hairline);border-radius:8px;overflow:hidden;background:var(--canvas-card);max-width:420px;width:100%;justify-self:end}
-@media (max-width:899px){.portrait{justify-self:start;max-width:360px}}
+@media (max-width:899px){.portrait{justify-self:start;max-width:min(52vw,240px)}.portrait img{height:auto}.portrait figcaption{padding:8px 12px}.portrait figcaption .cap:last-child{display:none}}
 .portrait img{width:100%;aspect-ratio:4/5;object-fit:cover;object-position:50% 18%}
 .portrait figcaption{display:flex;justify-content:space-between;gap:12px;padding:12px 16px;border-top:1px solid var(--hairline)}
 .metrics{position:relative;z-index:1;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));border-top:1px solid var(--hairline)}
