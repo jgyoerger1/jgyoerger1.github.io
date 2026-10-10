@@ -203,6 +203,28 @@ button{font:inherit;color:inherit}
 @media (min-width:900px){.shop{grid-template-columns:minmax(0,1.6fr) minmax(0,1fr)}}
 .shop .photo img{aspect-ratio:16/9;height:auto}
 
+/* rutline: Jordan's own app, real screens */
+.rl{display:grid;gap:48px;align-items:start}
+@media (min-width:1000px){.rl{grid-template-columns:minmax(0,1fr) minmax(0,1.55fr);gap:56px;align-items:center}}
+.rl-id{display:flex;align-items:center;gap:12px}
+.rl-id img{width:40px;height:40px;border-radius:10px;border:1px solid var(--hairline)}
+.rl .lead{margin-top:24px;max-width:34em}
+.rl .facts{margin-top:32px}
+.rl .facts li{justify-content:flex-start}
+.rl .facts .cap{flex:0 0 96px;color:var(--ink)}
+.rl .facts li > span:last-child{flex:1 1 220px;min-width:0}
+.rl .pills{margin-top:32px}
+.phones{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.phone{margin:0;display:grid;gap:12px;min-width:0}
+.phone .screen{border:1px solid var(--hairline);border-radius:28px;overflow:hidden;background:#0f1110;aspect-ratio:390/844;max-width:100%}
+.phone img{width:100%;height:100%;object-fit:cover;object-position:top}
+.phone figcaption{text-align:center}
+@media (max-width:699px){
+  .phones{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:12px;padding-bottom:8px;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+  .phones::-webkit-scrollbar{display:none}
+  .phone{flex:0 0 64%;scroll-snap-align:start}
+}
+
 /* off the clock */
 .ot{display:grid;gap:16px;margin-bottom:16px}
 @media (min-width:900px){.ot{grid-template-columns:minmax(0,1fr) minmax(0,1.25fr)}}
@@ -327,6 +349,7 @@ dialog.lb::backdrop{background:rgba(10,10,10,.92)}
       <a href="#education">Education</a>
       <a href="#skills">Skills</a>
       <a href="#products">Products</a>
+      <a href="#rutline">Rutline</a>
       <a href="#yoergoods">Yoergoods</a>
       <a href="#offclock">Off the clock</a>
       <a href="#contact">Contact</a>
@@ -674,6 +697,33 @@ dialog.lb::backdrop{background:rgba(10,10,10,.92)}
           </div>
         </article>
 
+      </div>
+    </div>
+  </section>
+
+  <section class="band" id="rutline">
+    <div class="wrap rl">
+      <div>
+        <div class="rl-id"><img src="img/rutline-icon.png" width="192" height="192" alt="Rutline app icon"><p class="eyebrow">Rutline &nbsp;·&nbsp; my own app &nbsp;·&nbsp; live</p></div>
+        <h2 class="d-md" style="margin-top:24px">Map. Predict. Track.</h2>
+        <p class="lead">Rutline is the whitetail hunting app I designed and built for my own seasons. It puts stands, sign, and trails on satellite imagery with the live wind, forecasts when deer will move, and turns a phone camera into a blood tracker.</p>
+        <ul class="facts">
+          <li><span class="cap">Map</span><span>Stands, blinds, cameras, sign, and trails with scent cones from the live wind, LiDAR terrain, property lines, public land, and hunting units</span></li>
+          <li><span class="cap">Predict</span><span>HuntCast scores every hour 0 to 100 from pressure, fronts, temperature, wind, and the rut calendar, then picks the stand that fits the wind</span></li>
+          <li><span class="cap">Track</span><span>A camera filter that grays everything except blood red, and drops a pin where you find it</span></li>
+          <li><span class="cap">Field Guide</span><span>Scroll-driven guides for field dressing, reading a blood trail, and scoring a buck, with a rack measurer that works from a photo</span></li>
+          <li><span class="cap">Camps</span><span>Share pins with your hunting group and sync across devices</span></li>
+        </ul>
+        <div class="pills">
+          <a class="pill primary" href="https://jordanyoerger.com/rutline/" target="_blank" rel="noopener">Open Rutline
+            <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M5 11 11 5M6 5h5v5"/></svg></a>
+          <span class="cap">React · TypeScript · Leaflet · Supabase · installable web app</span>
+        </div>
+      </div>
+      <div class="phones" aria-label="Rutline screens">
+        <figure class="phone"><div class="screen"><img src="img/rutline-map.jpg" width="780" height="1688" alt="Rutline map: stands, a blind, a trail camera, bedding, a food plot, and an entry route on satellite imagery with the live wind" loading="lazy"></div><figcaption class="cap">Map</figcaption></figure>
+        <figure class="phone"><div class="screen"><img src="img/rutline-huntcast.jpg" width="780" height="1688" alt="Rutline HuntCast: today scores 84, Great, with an hourly movement chart peaking at dawn and dusk" loading="lazy"></div><figcaption class="cap">HuntCast</figcaption></figure>
+        <figure class="phone"><div class="screen"><img src="img/rutline-guide.jpg" width="780" height="1688" alt="Rutline Field Guide: Scoring a buck, installment 03, with a drawing of a ten-point rack" loading="lazy"></div><figcaption class="cap">Field Guide</figcaption></figure>
       </div>
     </div>
   </section>
