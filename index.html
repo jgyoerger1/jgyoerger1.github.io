@@ -225,6 +225,23 @@ button{font:inherit;color:inherit}
   .phone{flex:0 0 64%;scroll-snap-align:start}
 }
 
+/* digital: Yoergoods Digital, live screens in browser frames */
+.dg{display:grid;gap:48px;align-items:center}
+@media (min-width:1000px){.dg{grid-template-columns:minmax(0,1fr) minmax(0,1.45fr);gap:56px}}
+.dg .lead{margin-top:24px;max-width:34em}
+.dg .facts{margin-top:32px}
+.dg .facts li{justify-content:flex-start}
+.dg .facts .cap{flex:0 0 96px;color:var(--ink)}
+.dg .facts li > span:last-child{flex:1 1 220px;min-width:0}
+.dg .pills{margin-top:32px}
+.browsers{display:grid;gap:16px}
+.browser{margin:0;border:1px solid var(--hairline);border-radius:10px;overflow:hidden;background:#0b1420;min-width:0}
+.browser-bar{display:flex;align-items:center;gap:6px;padding:8px 12px;border-bottom:1px solid var(--hairline);background:var(--canvas-card)}
+.browser-bar i{width:7px;height:7px;border-radius:50%;background:var(--canvas-mid)}
+.browser-bar .cap{margin-left:8px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.browser img{width:100%;height:auto;display:block}
+@media (min-width:1000px){.browsers .browser:last-child{width:86%;justify-self:end;margin-top:-56px;box-shadow:0 -1px 0 var(--canvas),0 24px 48px rgba(0,0,0,.45)}}
+
 /* off the clock */
 .ot{display:grid;gap:16px;margin-bottom:16px}
 @media (min-width:900px){.ot{grid-template-columns:minmax(0,1fr) minmax(0,1.25fr)}}
@@ -350,6 +367,7 @@ dialog.lb::backdrop{background:rgba(10,10,10,.92)}
       <a href="#skills">Skills</a>
       <a href="#products">Products</a>
       <a href="#rutline">Rutline</a>
+      <a href="#digital">Digital</a>
       <a href="#yoergoods">Yoergoods</a>
       <a href="#offclock">Off the clock</a>
       <a href="#contact">Contact</a>
@@ -724,6 +742,37 @@ dialog.lb::backdrop{background:rgba(10,10,10,.92)}
         <figure class="phone"><div class="screen"><img src="img/rutline-map.jpg" width="780" height="1688" alt="Rutline map: stands, a blind, a trail camera, bedding, a food plot, and an entry route on satellite imagery with the live wind" loading="lazy"></div><figcaption class="cap">Map</figcaption></figure>
         <figure class="phone"><div class="screen"><img src="img/rutline-huntcast.jpg" width="780" height="1688" alt="Rutline HuntCast: today scores 84, Great, with an hourly movement chart peaking at dawn and dusk" loading="lazy"></div><figcaption class="cap">HuntCast</figcaption></figure>
         <figure class="phone"><div class="screen"><img src="img/rutline-guide.jpg" width="780" height="1688" alt="Rutline Field Guide: Scoring a buck, installment 03, with a drawing of a ten-point rack" loading="lazy"></div><figcaption class="cap">Field Guide</figcaption></figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="band" id="digital">
+    <div class="wrap dg">
+      <div>
+        <p class="eyebrow">Digital &nbsp;·&nbsp; Yoergoods Digital</p>
+        <h2 class="d-md" style="margin-top:16px">Websites that work harder.</h2>
+        <p class="lead">Yoergoods Digital is my web design and build studio for small businesses. I plan, design, build, and launch each site myself, run it like a project, and tell you the price before any work starts.</p>
+        <ul class="facts">
+          <li><span class="cap">Builds</span><span>New business websites, refreshes of sites that haven't changed in years, and portfolio sites for professionals</span></li>
+          <li><span class="cap">The deal</span><span>Fixed-price quotes, weekly progress updates, and live in weeks, not months</span></li>
+          <li><span class="cap">Recent work</span><span>Yoerger Renovations, All Paws Pet Care, and the site you're reading now</span></li>
+        </ul>
+        <div class="pills">
+          <a class="pill primary" href="https://www.yoergoodsdigital.com/" target="_blank" rel="noopener">Visit yoergoodsdigital.com
+            <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M5 11 11 5M6 5h5v5"/></svg></a>
+          <a class="pill" href="https://www.yoergoodsdigital.com/work/" target="_blank" rel="noopener">See the work
+            <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M5 11 11 5M6 5h5v5"/></svg></a>
+        </div>
+      </div>
+      <div class="browsers">
+        <figure class="browser">
+          <div class="browser-bar" aria-hidden="true"><i></i><i></i><i></i><span class="cap">yoergoodsdigital.com</span></div>
+          <img src="img/ygd-home.jpg" width="1800" height="1125" alt="Yoergoods Digital homepage: Websites that work harder, with a gold and cream braided Y logo and a Build my quote button" loading="lazy">
+        </figure>
+        <figure class="browser">
+          <div class="browser-bar" aria-hidden="true"><i></i><i></i><i></i><span class="cap">yoergoodsdigital.com/work</span></div>
+          <img src="img/ygd-work.jpg" width="1800" height="815" alt="Yoergoods Digital work page showing the Yoerger Renovations and All Paws Pet Care projects" loading="lazy">
+        </figure>
       </div>
     </div>
   </section>
